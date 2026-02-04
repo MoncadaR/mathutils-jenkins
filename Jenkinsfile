@@ -1,6 +1,9 @@
 pipeline {
   agent any
 
+  tool {
+    maven 'MavenNew' 
+  }
   stages {
     stage('Checkout') {
       steps { checkout scm }
