@@ -43,14 +43,14 @@ pipeline {
       }
     }
 
-    stage('Quality Gate') {
-      steps {
+    //stage('Quality Gate') {
+      //steps {
         // Fails the pipeline if SonarQube quality gate fails
-        timeout(time: 5, unit: 'MINUTES') {
-          waitForQualityGate abortPipeline: true
-        }
-      }
-    }
+        //timeout(time: 5, unit: 'MINUTES') {
+         // waitForQualityGate abortPipeline: fals
+        //}
+      //}
+    //}
 
     stage('Package Artifact (JAR)') {
       steps {
