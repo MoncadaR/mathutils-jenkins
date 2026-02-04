@@ -8,6 +8,7 @@ pipeline {
 
     stage('Build + Test + Coverage + Package') {
       steps {
+        sh 'mvn -version'
         sh 'mvn -B clean verify'
       }
       post {
