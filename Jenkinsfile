@@ -6,25 +6,15 @@ pipeline {
       steps { checkout scm }
     }
 
-    stage('Build + Test') {
+    stage('Build + Test + Coverage + Package') {
       steps {
-        sh 'mvn -B clean test'
+        sh 'mvn -B clean verify'
       }
       post {
         always {
-          junit 'target/surefire-reports/*.xml'
-        }
-      }
-    }
-
-    stage('Coverage + Package') {
-      steps {
-        sh 'mvn -B verify'
-      }
-      post {
-        success {
-          archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
-          archiveArtifacts artifacts: 'target/site/jacoco/**', fingerprint: true
+          junit '**/target/surefire-reports/*.xml'
+          archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true, allowEmptyArchive: true
+          archiveArtifacts artifacts: '**/target/site/jacoco/**', fingerprint: true, allowEmptyArchive: true
         }
       }
     }
