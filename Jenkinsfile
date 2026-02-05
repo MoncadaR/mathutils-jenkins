@@ -65,12 +65,16 @@ pipeline {
   }
 post {
   success {
-    emailext(
+
+emailext(
   to: 'moncadaramon05@gmail.com',
   from: 'moncadaramon05@gmail.com',
   subject: "SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-  body: "Build URL: ${env.BUILD_URL}"
+  body: "Build URL: ${env.BUILD_URL}",
+  mimeType: 'text/plain',
+  replyTo: 'moncadaramon05@gmail.com'
 )
+    
   }
 
   failure {
